@@ -1,0 +1,10 @@
+name: Swarps
+version: '${project.version}'
+main: de.max.swarps.Swarps
+api-version: 1.17
+authors: [ xMaxelx ]
+
+commands:
+  swarp:
+  swarps:
+    aliases: sw
