@@ -17,7 +17,7 @@ public class SpielerWarpAPI {
     public static void createConfig() {
         File file = new File("plugins/SpielerWarps/config.yml");
         YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-        cfg.addDefault("Prefix", "§8▐§aSWarps §8» ");
+        cfg.addDefault("Prefix", "§8▐§a SWarps §8» ");
         cfg.options().copyDefaults(true);
         try {
             cfg.save(file);

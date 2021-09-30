@@ -12,6 +12,14 @@ public class SWarpCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player p) {
             if (p.hasPermission("sw.use")) {
+                if(args.length == 0) {
+                 p.sendMessage("§8§m--------[§aSpielerWarp§8§m]--------");
+                 p.sendMessage("");
+                 p.sendMessage("§c/swarp create §8| §eErstelle dein Spieler-Warp oder wenn du schon ein hast setzte ihn um!");
+                 p.sendMessage("§c/swarp delete §8| §eLösche dein Spieler-Warp");
+                 p.sendMessage("");
+                 p.sendMessage("§8§m--------[§aSpielerWarp§8§m]--------");
+                }
                 if (args.length == 1) {
                     if (args[0].equalsIgnoreCase("create")) {
                         SpielerWarpAPI.createWarp(p, p.getLocation());

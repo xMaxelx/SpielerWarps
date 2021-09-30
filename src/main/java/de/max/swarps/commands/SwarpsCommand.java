@@ -13,6 +13,9 @@ public class SwarpsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player p) {
+            if(args.length == 0) {
+                p.sendMessage(SpielerWarpAPI.getPrefix() + "§eBitte Benutze: /swarps (SpielerName)");
+            }
             if (args.length == 1) {
                 OfflinePlayer t = Bukkit.getOfflinePlayer(args[0]);
                 FileManager file = new FileManager("plugins/SpielerWarps/Warps/", t.getUniqueId() + ".yml");
