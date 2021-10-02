@@ -39,18 +39,30 @@ public class SpielerWarpAPI {
         file.set("Create Date", getDate());
         file.set(p.getName(), loc);
         file.set("Wartung", false);
-        p.sendMessage(getPrefix() + "§aDein Spieler-Warp wurde erstellt!");
+        if(p.getLocale().equalsIgnoreCase("de_DE")) {
+            p.sendMessage(getPrefix() + "§aDein Spieler-Warp wurde erstellt!");
+        } else {
+            p.sendMessage(getPrefix() + "§aYour player-warp was created!");
+        }
         file.save();
     }
 
     public static void deleteWarp(Player p) {
         FileManager file = new FileManager("plugins/SpielerWarps/Warps/", p.getUniqueId() + ".yml");
         if (!file.exist()) {
-            p.sendMessage(getPrefix() + "§cDu hast kein Spieler-Warp!");
+            if(p.getLocale().equalsIgnoreCase("de_DE")) {
+                p.sendMessage(getPrefix() + "§cDu hast kein Spieler-Warp!");
+            } else {
+                p.sendMessage(getPrefix() + "§cYou have no player warp!");
+            }
             return;
         } else {
             file.delete();
-            p.sendMessage(getPrefix() + "§cDu hast dein Spieler-Warp gelöscht!");
+            if(p.getLocale().equalsIgnoreCase("de_DE")) {
+                p.sendMessage(getPrefix() + "§cDu hast dein Spieler-Warp gelöscht!");
+            } else {
+                p.sendMessage(getPrefix() + "You have deleted your player warp!");
+            }
         }
     }
 

@@ -14,7 +14,11 @@ public class SwarpsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player p) {
             if (args.length == 0) {
-                p.sendMessage(SpielerWarpAPI.getPrefix() + "§eBitte Benutze: /swarps (SpielerName)");
+                if(p.getLocale().equalsIgnoreCase("de_DE")) {
+                    p.sendMessage(SpielerWarpAPI.getPrefix() + "§eBitte Benutze: /swarps (SpielerName)");
+                } else {
+                    p.sendMessage(SpielerWarpAPI.getPrefix() + "§ePlease use: /swarps (PlayerName)");
+                }
             }
             if (args.length == 1) {
                 OfflinePlayer t = Bukkit.getOfflinePlayer(args[0]);
@@ -23,13 +27,25 @@ public class SwarpsCommand implements CommandExecutor {
                 if (file.exist()) {
                     if (file.getBoolean("Wartung") == false) {
                         p.teleport(file.getLocation(t.getName()));
-                        p.sendMessage(SpielerWarpAPI.getPrefix() + "§7Du hast dich zum Spieler-Warp von §e" + t.getName() + " §7teleportiert!");
+                        if(p.getLocale().equalsIgnoreCase("de_DE")) {
+                            p.sendMessage(SpielerWarpAPI.getPrefix() + "§7Du hast dich zum Spieler-Warp von §e" + t.getName() + " §7teleportiert!");
+                        } else {
+                            p.sendMessage(SpielerWarpAPI.getPrefix() + "§7You teleported to §e" + t.getName() + "'s §7player warp!");
+                        }
                     }else if (file.getBoolean("Wartung") == true) {
-                        p.sendMessage("§cne wartung!!!");
+                        if(p.getLocale().equalsIgnoreCase("de_DE")) {
+                            p.sendMessage(SpielerWarpAPI.getPrefix() + "§cDieser Spieler-Warp ist zurzeit in Wartung!");
+                        } else {
+                            p.sendMessage(SpielerWarpAPI.getPrefix() + "§cThis player warp is currently in maintenance!");
+                        }
                         return true;
                     }
                 } else {
-                    p.sendMessage(SpielerWarpAPI.getPrefix() + "§cDieser Spieler hat kein Spieler-Warp!");
+                    if(p.getLocale().equalsIgnoreCase("de_DE")) {
+                        p.sendMessage(SpielerWarpAPI.getPrefix() + "§cDieser Spieler hat kein Spieler-Warp!");
+                    } else {
+                        p.sendMessage(SpielerWarpAPI.getPrefix() + "§cThis player has no player warp!");
+                    }
                 }
             }
         }

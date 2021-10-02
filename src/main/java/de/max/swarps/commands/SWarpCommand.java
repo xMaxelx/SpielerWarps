@@ -16,12 +16,21 @@ public class SWarpCommand implements CommandExecutor {
             FileManager file = new FileManager("plugins/SpielerWarps/Warps/", p.getUniqueId() + ".yml");
             if (p.hasPermission("sw.use")) {
                 if (args.length == 0) {
-                    p.sendMessage("§8§m--------[§aSpielerWarp§8§m]--------");
-                    p.sendMessage("");
-                    p.sendMessage("§c/swarp create §8| §eErstelle dein Spieler-Warp oder wenn du schon ein hast setzte ihn um!");
-                    p.sendMessage("§c/swarp delete §8| §eLösche dein Spieler-Warp");
-                    p.sendMessage("");
-                    p.sendMessage("§8§m--------[§aSpielerWarp§8§m]--------");
+                    if(p.getLocale().equalsIgnoreCase("de_DE")) {
+                        p.sendMessage("§8§m--------[§aSpielerWarp§8§m]--------");
+                        p.sendMessage("");
+                        p.sendMessage("§c/swarp create §8| §eErstelle dein Spieler-Warp oder wenn du schon ein hast setzte ihn um!");
+                        p.sendMessage("§c/swarp delete §8| §eLösche dein Spieler-Warp");
+                        p.sendMessage("");
+                        p.sendMessage("§8§m--------[§aSpielerWarp§8§m]--------");
+                    } else {
+                        p.sendMessage("§8§m--------[§aPlayerWarp§8§m]--------");
+                        p.sendMessage("");
+                        p.sendMessage("§c/swarp create §8| §eCreate your player warp or if you already have one implement it!");
+                        p.sendMessage("§c/swarp delete §8| §eDelete your player warp!");
+                        p.sendMessage("");
+                        p.sendMessage("§8§m--------[§aPlayerWarp§8§m]--------");
+                    }
                 }
                 if (args.length == 1) {
                     if (args[0].equalsIgnoreCase("create")) {
@@ -34,17 +43,35 @@ public class SWarpCommand implements CommandExecutor {
                                 file.delete("Wartung");
                                 file.set("Wartung", true);
                                 file.save();
-                                p.sendMessage(SpielerWarpAPI.getPrefix() +"§aWartung wurde für dein Spieler-Warp aktiviert!");
+                                if(p.getLocale().equalsIgnoreCase("de_DE")) {
+                                    p.sendMessage(SpielerWarpAPI.getPrefix() + "§aWartung wurde für dein Spieler-Warp aktiviert!");
+                                } else {
+                                    p.sendMessage(SpielerWarpAPI.getPrefix() + "§aMaintenance has been activated for your player warp!");
+                                }
                             } else if (file.getBoolean("Wartung")) {
                                 file.delete("Wartung");
                                 file.set("Wartung", false);
                                 file.save();
-                                p.sendMessage(SpielerWarpAPI.getPrefix() +"§cWartung wurde für dein Spieler-Warp deaktiviert!");
+                                if(p.getLocale().equalsIgnoreCase("de_DE")) {
+                                    p.sendMessage(SpielerWarpAPI.getPrefix() + "§cWartung wurde für dein Spieler-Warp deaktiviert!");
+                                } else {
+                                    p.sendMessage(SpielerWarpAPI.getPrefix() + "§cMaintenance has been disabled for your player warp!");
+                                }
                             }
                         } else if(!file.exist()) {
-                            p.sendMessage("jibts net");
+                            if(p.getLocale().equalsIgnoreCase("de_DE")) {
+                                p.sendMessage(SpielerWarpAPI.getPrefix() + "§cDu hast kein Spieler-Warp!");
+                            } else {
+                                p.sendMessage(SpielerWarpAPI.getPrefix() + "You have no player warp!");
+                            }
                         }
                     }
+                }
+            } else {
+                if (p.getLocale().equalsIgnoreCase("de_DE")) {
+                    p.sendMessage(SpielerWarpAPI.getPrefix() + "§cDu brauchst den Rang Premium oder höher!");
+                } else {
+                    p.sendMessage(SpielerWarpAPI.getPrefix() + "§cYou need the rank Premium or higher!");
                 }
             }
         }
