@@ -33,10 +33,12 @@ public class SpielerWarpAPI {
 
 
     public static void createWarp(Player p, Location loc) {
+        int usenumber = 0;
         FileManager file = new FileManager("plugins/SpielerWarps/Warps/", p.getUniqueId() + ".yml");
         file.set("Owner", p.getName());
         file.set("Create Date", getDate());
         file.set(p.getName(), loc);
+        file.set("Wartung", false);
         p.sendMessage(getPrefix() + "§aDein Spieler-Warp wurde erstellt!");
         file.save();
     }
